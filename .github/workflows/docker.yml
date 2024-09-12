@@ -11,6 +11,8 @@ on:
     branches:
       - main
       - next
+  release:
+    types: [created] # Triggers the workflow when a release is created
 
 permissions:
   contents: write
