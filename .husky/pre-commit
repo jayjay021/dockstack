@@ -1,1 +1,1 @@
-echo "test"
+pnpm run lint-staged --concurrent false --quiet
