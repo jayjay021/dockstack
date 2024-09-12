@@ -6,9 +6,11 @@ on:
       - 'v*' # Triggers on all tag pushes
     branches: # Triggers on all branch pushes
       - main
+      - next
   pull_request:
     branches:
       - main
+      - next
 
 permissions:
   contents: write
@@ -50,8 +52,10 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
+            type=raw,value=latest,enable={{is_default_branch}}
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}-latest
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
