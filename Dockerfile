@@ -1,42 +1,21 @@
-# Step 1: Build the Next.js application
-FROM node:20-alpine AS builder
-
-# Set the working directory in the container
+FROM node:20 AS base
 WORKDIR /app
+RUN npm i -g pnpm
+COPY package.json pnpm-lock.yaml ./
 
-# Install pnpm
-RUN npm install -g pnpm
+RUN pnpm install
 
-# Copy package.json, pnpm-lock.yaml (or package-lock.json if you're still using npm for some reason) to the working directory
-COPY package.json pnpm-lock.yaml* ./
-
-# Install dependencies
-RUN pnpm install --frozen-lockfile
-
-# Copy the rest of the application code
 COPY . .
+RUN pnpm build
 
-# Build the Next.js application
-RUN pnpm run build
-
-# Step 2: Serve the application using a Node.js server
-FROM node:20-alpine AS runner
-
-# Set the working directory in the container
+FROM node:20-alpine as release
 WORKDIR /app
+RUN npm i -g pnpm
 
-# Install pnpm in the runtime container
-RUN npm install -g pnpm
+COPY --from=base /app/node_modules ./node_modules
+COPY --from=base /app/package.json ./package.json
+COPY --from=base /app/.next ./.next
 
-# Copy the built application from the builder stage
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-# Expose the port the app runs on
 EXPOSE 3000
 
-# Set the command to start the Next.js application
 CMD ["pnpm", "start"]
