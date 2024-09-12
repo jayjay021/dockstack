@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/jayjay021/dockstack/compare/v1.0.0...v1.0.1) (2024-09-12)
+
+### Bug Fixes
+
+- docker multiarch ([b4912af](https://github.com/jayjay021/dockstack/commit/b4912afac8db64d822fd60aa92aba28af02b3714))
+
 # 1.0.0 (2024-09-12)
 
 ### Bug Fixes
