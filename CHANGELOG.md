@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/jayjay021/dockstack/compare/v1.0.1...v1.1.0) (2024-09-12)
+
+### Bug Fixes
+
+- docker build ([93e139d](https://github.com/jayjay021/dockstack/commit/93e139d1ae56c03ac53346aefd8aed27028e70cb))
+
+### Features
+
+- package.json version ([d0ce11b](https://github.com/jayjay021/dockstack/commit/d0ce11b7ad5da7104f74c32e73abf6c736301ed8))
+
 ## [1.0.1](https://github.com/jayjay021/dockstack/compare/v1.0.0...v1.0.1) (2024-09-12)
 
 ### Bug Fixes
