@@ -10,13 +10,14 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    concurrency:
-      group: docker-build-${{ github.ref }}
-      cancel-in-progress: true
 
     strategy:
       matrix:
