@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/jayjay021/dockstack/compare/v1.1.0...v1.1.1) (2024-09-12)
+
+### Bug Fixes
+
+- release trigger ([68d816d](https://github.com/jayjay021/dockstack/commit/68d816dcf234fa37d3d6b331814f0440fb6fa3a5))
+
 # [1.1.0](https://github.com/jayjay021/dockstack/compare/v1.0.1...v1.1.0) (2024-09-12)
 
 ### Bug Fixes
