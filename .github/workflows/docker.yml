@@ -12,7 +12,7 @@ on:
       - main
       - next
   release:
-    types: [created] # Triggers the workflow when a release is created
+    types: [created, published] # Triggers the workflow when a release is created
 
 permissions:
   contents: write
