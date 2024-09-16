@@ -12,7 +12,8 @@
     "format:fix": "prettier --write --list-different .",
     "prepare": "husky",
     "commit": "cz",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "generate:api": "openapi-generator-cli generate -i ./src/services/docker-api/openapi.yaml -g typescript-axios -o ./src/services/docker-api"
   },
   "dependencies": {
     "@lucia-auth/adapter-sqlite": "^3.0.2",
@@ -33,10 +34,13 @@
     "@tiptap/extension-link": "^2.6.6",
     "@tiptap/react": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
+    "axios": "^1.7.7",
     "better-sqlite3": "^11.3.0",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "lucia": "^3.2.0",
     "mantine-form-zod-resolver": "^1.1.0",
+    "mantine-react-table": "2.0.0-beta.6",
     "negotiator": "^0.6.3",
     "next": "14.2.10",
     "next-intl": "^3.19.1",
@@ -52,6 +56,7 @@
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/cz-commitlint": "^19.5.0",
     "@commitlint/types": "^19.5.0",
+    "@openapitools/openapi-generator-cli": "^2.13.5",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^12.0.1",

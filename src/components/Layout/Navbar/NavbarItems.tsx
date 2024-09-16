@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import { NavLink, useMantineTheme } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-import { redirect } from 'next/navigation';
+import { NavLink } from '@mantine/core';
+
+import classes from './NavbarItems.module.css';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export interface NavbarItemProps {
   icon: React.ReactNode;
@@ -10,34 +12,18 @@ export interface NavbarItemProps {
 }
 
 const NavbarItem: FC<NavbarItemProps> = ({ icon, label, to }) => {
-  const theme = useMantineTheme();
-  const matchSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const path = usePathname();
 
   return (
     <NavLink
-      onClick={() => {
-        redirect(to);
-      }}
+      component={Link}
       variant="light"
-      /* active={!!match} */
-      styles={
-        !matchSm
-          ? {
-              root: {
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'column',
-              },
-              section: {
-                margin: '0px',
-                marginInlineEnd: '0px',
-              },
-              label: {
-                fontSize: 'var(--mantine-font-size-xs)',
-              },
-            }
-          : {}
-      }
+      classNames={{
+        root: classes.root,
+        label: classes.label,
+        section: classes.section,
+      }}
+      active={path === `/${to}`}
       href={to}
       leftSection={icon}
       label={label}

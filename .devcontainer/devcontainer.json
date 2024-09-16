@@ -6,16 +6,25 @@
   },
   "remoteUser": "node",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/java:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
+  /*   "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ], */
   "customizations": {
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-vscode-remote.remote-containers",
-        "alexcvzz.vscode-sqlite",
-        "PulkitGangwar.nextjs-snippets"
+        "PulkitGangwar.nextjs-snippets",
+        "qwtel.sqlite-viewer",
+        "Lokalise.i18n-ally",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.vscode-pull-request-github"
       ]
     }
   }

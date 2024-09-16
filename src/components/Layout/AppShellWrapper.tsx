@@ -1,10 +1,12 @@
 'use client';
-import { AppShell, Container, useMantineTheme } from '@mantine/core';
+import { AppShell, Container } from '@mantine/core';
 import Header from './Header/Header';
 import Navbar from './Navbar/Navbar';
 import { FC } from 'react';
 import { User } from 'lucia';
-import { useDisclosure, useMediaQuery } from '@mantine/hooks';
+import { useDisclosure } from '@mantine/hooks';
+
+import classes from './AppShellWrapper.module.css';
 
 interface AppShellWrapperProps {
   children: React.ReactNode;
@@ -13,9 +15,6 @@ interface AppShellWrapperProps {
 
 const AppShellWrapper: FC<AppShellWrapperProps> = ({ children, user }) => {
   const [opened, { toggle }] = useDisclosure();
-
-  const theme = useMantineTheme();
-  const matchMd = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
 
   return (
     <AppShell
@@ -29,18 +28,7 @@ const AppShellWrapper: FC<AppShellWrapperProps> = ({ children, user }) => {
     >
       <Header opened={opened} toggle={toggle} user={user} />
       <AppShell.Main>
-        <Container
-          size="xl"
-          p="sm"
-          h={
-            'calc(100vh - var(--app-shell-header-height, 0px) - var(--app-shell-footer-height, 0px))'
-          }
-          w={
-            !matchMd
-              ? 'calc(100vw - var(--app-shell-navbar-width, 0px)'
-              : '100%'
-          }
-        >
+        <Container p="sm" size="xl" className={classes.container}>
           <Navbar />
           {children}
         </Container>

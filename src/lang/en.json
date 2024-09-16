@@ -38,7 +38,33 @@
       "container": "Container",
       "stacks": "Stacks",
       "volumes": "Volumes",
-      "networks": "Networks"
+      "networks": "Networks",
+      "appTemplates": "Templates",
+      "services": "Services",
+      "images": "Images",
+      "configs": "Configs",
+      "secrets": "Secrets"
+    }
+  },
+  "pages": {
+    "containers": {
+      "h1": "Container",
+      "table:": {},
+      "table": {
+        "state": {
+          "running": "running",
+          "exited": "exited",
+          "stopped": "stopped"
+        },
+        "header": {
+          "state": "State",
+          "status": "Status",
+          "name": "Name",
+          "image": "Image",
+          "id": "Id",
+          "actions": "Actions"
+        }
+      }
     }
   }
 }

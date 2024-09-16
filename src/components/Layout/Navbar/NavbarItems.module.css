@@ -1,0 +1,33 @@
+.root{
+    @media (min-width: $mantine-breakpoint-sm) {
+        display: flex;
+        align-items: center;
+        flex-direction: column;       
+    }
+}
+
+.section{
+    @media (min-width: $mantine-breakpoint-sm) {
+        margin: 0px;
+        marginInlineEnd: 0px;
+    }
+}
+
+.label{
+    @media (min-width: $mantine-breakpoint-sm) {
+        font-size: var(--mantine-font-size-xs);
+    }
+}
+
+/* root: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  section: {
+    margin: '0px',
+    marginInlineEnd: '0px',
+  },
+  label: {
+    fontSize: 'var(--mantine-font-size-xs)',
+  }, */

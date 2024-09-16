@@ -4,15 +4,19 @@ import NavbarItem, {
 import { AppShell } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import {
-  IconChartDonut,
-  IconFiles,
-  IconHierarchy2,
-  IconMessages,
-  IconSettings,
+  IconFileSettings,
+  IconPackages,
+  IconPackage,
+  IconStack3,
+  IconDashboard,
+  IconTemplate,
+  IconCloudComputing,
+  IconDatabase,
+  IconKey,
 } from '@tabler/icons-react';
 import { FC } from 'react';
 
-const ICON_STROKE = 1.2;
+export const ICON_STROKE = 1.2;
 
 const Navbar: FC = () => {
   const t = useTranslations('nav');
@@ -21,27 +25,49 @@ const Navbar: FC = () => {
     {
       to: 'dashboard',
       label: t('nav.dashboard'),
-      icon: <IconMessages stroke={ICON_STROKE} />,
+      icon: <IconDashboard stroke={ICON_STROKE} />,
     },
     {
-      to: 'containers',
-      label: t('nav.container'),
-      icon: <IconFiles stroke={ICON_STROKE} />,
+      to: 'app-templates',
+      label: t('nav.appTemplates'),
+      icon: <IconTemplate stroke={ICON_STROKE} />,
     },
     {
       to: 'stacks',
       label: t('nav.stacks'),
-      icon: <IconHierarchy2 stroke={ICON_STROKE} />,
+      icon: <IconStack3 stroke={ICON_STROKE} />,
+    },
+    {
+      to: 'containers',
+      label: t('nav.container'),
+      icon: <IconPackage stroke={ICON_STROKE} />,
+    },
+    {
+      to: 'images',
+      label: t('nav.images'),
+      icon: <IconPackages stroke={ICON_STROKE} />,
+    },
+
+    {
+      to: 'networks',
+      label: t('nav.networks'),
+      icon: <IconCloudComputing stroke={ICON_STROKE} />,
     },
     {
       to: 'volumes',
       label: t('nav.volumes'),
-      icon: <IconChartDonut stroke={ICON_STROKE} />,
+      icon: <IconDatabase stroke={ICON_STROKE} />,
+    },
+
+    {
+      to: 'configs',
+      label: t('nav.configs'),
+      icon: <IconFileSettings stroke={ICON_STROKE} />,
     },
     {
-      to: 'networks',
-      label: t('nav.networks'),
-      icon: <IconSettings stroke={ICON_STROKE} />,
+      to: 'secrets',
+      label: t('nav.secrets'),
+      icon: <IconKey stroke={ICON_STROKE} />,
     },
   ];
 
