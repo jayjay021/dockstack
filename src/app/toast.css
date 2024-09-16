@@ -1,0 +1,13 @@
+.toast {
+	background-color: var(--mantine-color-body);
+	font-size: var(--mantine-font-size-sm);
+	color: var(--mantine-color-text);
+}
+
+button {
+	color: var(--mantine-color-text);
+}
+
+.Toastify__close-button {
+	color: var(--mantine-color-text);
+}

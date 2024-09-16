@@ -1,0 +1,22 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+  "name": "Dockstack Nextjs",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "node",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode-remote.remote-containers",
+        "alexcvzz.vscode-sqlite",
+        "PulkitGangwar.nextjs-snippets"
+      ]
+    }
+  }
+}
