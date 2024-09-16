@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["commitlint", "dockstack", "precommit"]
+  "cSpell.words": ["commitlint", "dockstack", "precommit"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "i18n-ally.localesPaths": ["src/i18n", "src/lang"],
+  "i18n-ally.keystyle": "nested"
 }

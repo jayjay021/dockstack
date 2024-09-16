@@ -1,0 +1,44 @@
+{
+  "auth": {
+    "signin": {
+      "h1": "Sign In",
+      "name": "Name",
+      "password": "Password",
+      "action": "Sign In",
+      "secondary": "No credentials?",
+      "secondary-link": "Reset"
+    },
+    "signup": {
+      "h1": "Sign Up",
+      "name": "Name",
+      "password": "Password",
+      "passwordConfirmation": "Confirm Password",
+      "action": "Sign Up"
+    },
+    "reset": {
+      "h1": "Reset",
+      "resetkey": "Key",
+      "action": "Reset",
+      "secondary": "Found credentials?",
+      "secondary-link": "Sign In"
+    }
+  },
+  "header": {
+    "title": "Dockstack",
+    "avatar": {
+      "menu": {
+        "settings": "Settings",
+        "logout": "Logout"
+      }
+    }
+  },
+  "nav": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "container": "Container",
+      "stacks": "Stacks",
+      "volumes": "Volumes",
+      "networks": "Networks"
+    }
+  }
+}
