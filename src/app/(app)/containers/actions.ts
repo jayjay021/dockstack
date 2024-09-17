@@ -12,13 +12,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     if (config.url) {
-      const url = new URL(config.baseURL + config.url, 'http://dummy-base'); // Create a dummy URL to parse the path
+      const url = new URL(config.baseURL + config.url); // Create a dummy URL to parse the path
       const pathSegments = url.pathname.split('/');
       if (pathSegments.length > 1) {
         pathSegments[0] = 'v1.43'; // Replace 'new-segment' with your desired value
         url.pathname = pathSegments.join('/');
-        console.log(url.pathname, config.baseURL, config.url);
-        config.url = url.pathname.replace(config.baseURL!, ''); // Update the URL path in the config
+        config.url = url.pathname
+          .replace(config.baseURL!, '')
+          .concat(url.search); // Update the URL path in the config
       }
     }
     return config;
@@ -31,8 +32,10 @@ axiosInstance.interceptors.request.use(
 export async function listDockerContainer(): Promise<ContainerSummary[]> {
   try {
     const containerApi = new ContainerApi(undefined, undefined, axiosInstance);
-    const containers = (await containerApi.containerList()).data;
-    return containers;
+    const res = await containerApi.containerList(true);
+    return res.data.filter(
+      (container) => !container.Names?.join(',').match('stash'),
+    );
   } catch (e) {
     console.error(e);
     return [];

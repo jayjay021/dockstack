@@ -48,9 +48,22 @@
   },
   "pages": {
     "containers": {
-      "h1": "Container",
-      "table:": {},
       "table": {
+        "toolbar": {
+          "title": "Container",
+          "searchbar": "Suchen...",
+          "actions": {
+            "start": "Starten",
+            "stop": "Stoppen",
+            "kill": "Beenden",
+            "restart": "Neustarten",
+            "pause": "Pausieren",
+            "resume": "Fortsetzen",
+            "remove": "Entfernen",
+            "create": "Erstellen",
+            "refresh": "Aktualisieren"
+          }
+        },
         "state": {
           "running": "läuft",
           "exited": "beendet",
@@ -65,6 +78,11 @@
           "actions": "Aktionen"
         }
       }
+    }
+  },
+  "component": {
+    "searchbar": {
+      "placeholder": "Suchen..."
     }
   }
 }

@@ -1,3 +1,4 @@
+'use client';
 import { Menu, rem } from '@mantine/core';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

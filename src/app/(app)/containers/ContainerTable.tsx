@@ -1,7 +1,7 @@
 'use client';
 
 import { ContainerSummary } from '@/services/docker-api';
-import { ActionIcon, Badge, Box } from '@mantine/core';
+import { ActionIcon, Badge, Box, Button, Title } from '@mantine/core';
 import { FC, useMemo } from 'react';
 
 import {
@@ -9,9 +9,22 @@ import {
   useMantineReactTable,
   type MRT_ColumnDef,
 } from 'mantine-react-table';
-import { IconListSearch, IconTerminal2, IconTrash } from '@tabler/icons-react';
+import {
+  IconCancel,
+  IconListSearch,
+  IconPackage,
+  IconPlayerPause,
+  IconPlayerPlay,
+  IconPlayerStop,
+  IconRestore,
+  IconTerminal2,
+  IconTrash,
+} from '@tabler/icons-react';
 import { ICON_STROKE } from '@/components/Layout/Navbar/Navbar';
 import { useTranslations } from 'next-intl';
+
+import classes from './ContainerTable.module.css';
+import Searchbar from '@/components/Searchbar';
 
 interface ContainerTableProps {
   data: ContainerSummary[];
@@ -28,25 +41,34 @@ const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
           switch (originalRow.State) {
             case 'running':
               return (
-                <Badge size="xs" color="green">
+                <Badge size="xs" color="green" fullWidth>
                   {t('table.state.running')}
                 </Badge>
               );
             case 'exited':
-              return <Badge color="red">{t('table.state.exited')}</Badge>;
+              return (
+                <Badge size="xs" color="red" fullWidth>
+                  {t('table.state.exited')}
+                </Badge>
+              );
             case 'stopped':
-              return <Badge color="red">{t('table.state.stopped')}</Badge>;
+              return (
+                <Badge size="xs" color="red" fullWidth>
+                  {t('table.state.stopped')}
+                </Badge>
+              );
             default:
               return originalRow.State;
           }
         },
-        size: 50,
+        minSize: 40,
+        size: 40,
       },
       {
         id: 'status',
         header: t('table.header.status'),
         accessorKey: 'Status',
-        size: 50,
+        size: 100,
       },
 
       {
@@ -88,16 +110,13 @@ const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
           <ActionIcon color="blue" size="sm">
             <IconListSearch stroke={ICON_STROKE} size={18} />
           </ActionIcon>
-          <ActionIcon color="red" size="sm">
-            <IconTrash stroke={ICON_STROKE} size={18} />
-          </ActionIcon>
         </Box>
       );
     },
     displayColumnDefOptions: {
       'mrt-row-actions': {
         header: t('table.header.actions'),
-        size: 54,
+        size: 36,
       },
     },
     enableGlobalFilter: false,
@@ -106,14 +125,91 @@ const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
     enableColumnFilters: false,
     enablePagination: false,
     enableSorting: false,
+    enableRowSelection: true,
+    positionToolbarAlertBanner: 'head-overlay',
     mantineTableContainerProps: {
       h: '100%',
     },
     mantinePaperProps: {
       style: { flexGrow: 1 },
     },
-    renderTopToolbarCustomActions: () => {
-      return <>Custom</>;
+    renderTopToolbarCustomActions: ({ table }) => {
+      const rowSelection = table.getState().rowSelection;
+      const anyRowSelected = Object.keys(rowSelection).length > 0;
+
+      return (
+        <Box className={classes.toolbarCustomActionsContainer}>
+          <Box className={classes.title}>
+            <Box className={classes.icon}>
+              <IconPackage stroke={ICON_STROKE} size={24} />
+            </Box>
+            <Title ml="xs" order={3}>
+              {t('table.toolbar.title')}
+            </Title>
+          </Box>
+          <Box className={classes.searchbar}>
+            <Searchbar />
+          </Box>
+          <Box className={classes.actions}>
+            <Button
+              disabled={!anyRowSelected}
+              color="red"
+              size="xs"
+              leftSection={<IconTrash stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.remove')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconPlayerPlay stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.resume')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconPlayerPause stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.pause')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconRestore stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.restart')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconCancel stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.kill')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconPlayerStop stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.stop')}
+            </Button>
+            <Button
+              disabled={!anyRowSelected}
+              variant="outline"
+              size="xs"
+              leftSection={<IconPlayerPlay stroke={ICON_STROKE} size={18} />}
+            >
+              {t('table.toolbar.actions.start')}
+            </Button>
+          </Box>
+        </Box>
+      );
     },
     renderToolbarInternalActions: () => {
       return <></>;

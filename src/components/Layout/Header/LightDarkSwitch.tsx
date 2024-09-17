@@ -6,34 +6,15 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 const LightDarkSwitch: FC = () => {
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme('dark');
 
   const toggleColorScheme = () => {
     setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
-    document.body.style.background =
-      colorScheme === 'dark'
-        ? 'var(--mantine-color-gray-2)'
-        : 'var(--mantine-color-dark-5)';
-    document.body.style.color =
-      colorScheme === 'dark'
-        ? 'var(--mantine-color-black)'
-        : 'var(--mantine-color-gray-0)';
   };
-
-  useEffect(() => {
-    document.body.style.background =
-      computedColorScheme === 'dark'
-        ? 'var(--mantine-color-dark-5)'
-        : 'var(--mantine-color-gray-2)';
-    document.body.style.color =
-      computedColorScheme === 'dark'
-        ? 'var(--mantine-color-gray-0)'
-        : 'var(--mantine-color-black)';
-  }, [computedColorScheme]);
 
   const sunIcon = (
     <IconSun

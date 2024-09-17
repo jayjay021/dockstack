@@ -1,3 +1,4 @@
+'use client';
 import Avatar from '@/components/Layout/Header/Avatar';
 import LightDarkSwitch from '@/components/Layout/Header/LightDarkSwitch';
 import Logo from '@/components/Layout/Header/Logo';

@@ -28,7 +28,7 @@ const AppShellWrapper: FC<AppShellWrapperProps> = ({ children, user }) => {
     >
       <Header opened={opened} toggle={toggle} user={user} />
       <AppShell.Main>
-        <Container p="sm" size="xl" className={classes.container}>
+        <Container p="sm" size="xxxl" className={classes.container}>
           <Navbar />
           {children}
         </Container>

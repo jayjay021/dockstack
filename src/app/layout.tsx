@@ -50,11 +50,11 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <ColorSchemeScript defaultColorScheme="dark" />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <MantineProvider theme={theme} defaultColorScheme="dark">
+          <MantineProvider theme={theme} defaultColorScheme="auto">
             <ModalsProvider>
               <ToastContainer
                 hideProgressBar
