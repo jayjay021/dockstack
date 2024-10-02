@@ -1,4 +1,5 @@
 'use server';
+import { validateRequest } from '@/lib/lucia';
 import { ContainerApi, ContainerSummary } from '@/services/docker-api';
 import axios from 'axios';
 import 'server-only';
@@ -22,6 +23,7 @@ axiosInstance.interceptors.request.use(
           .concat(url.search); // Update the URL path in the config
       }
     }
+
     return config;
   },
   (error) => {
@@ -30,6 +32,12 @@ axiosInstance.interceptors.request.use(
 );
 
 export async function listDockerContainer(): Promise<ContainerSummary[]> {
+  const user = validateRequest();
+
+  if (!user) {
+    throw new Error('User is not authenticated');
+  }
+
   try {
     const containerApi = new ContainerApi(undefined, undefined, axiosInstance);
     const res = await containerApi.containerList(true);
@@ -39,5 +47,26 @@ export async function listDockerContainer(): Promise<ContainerSummary[]> {
   } catch (e) {
     console.error(e);
     return [];
+  }
+}
+
+export async function getDockerContainerLogs(id: string): Promise<string> {
+  const user = validateRequest();
+
+  if (!user) {
+    throw new Error('User is not authenticated');
+  }
+
+  try {
+    const containerApi = new ContainerApi(undefined, undefined, axiosInstance);
+
+    //current unix timestamp minus 1 hour
+    //const since = Math.floor(Date.now() / 1000) - 3600;
+
+    const res = await containerApi.containerLogs(id, false, true, true);
+    return res.data as unknown as string;
+  } catch (e) {
+    console.error(e);
+    return '';
   }
 }

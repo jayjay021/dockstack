@@ -13,6 +13,7 @@ export default async function ContainersPage({
 }) {
   /*  const t = await getTranslations('pages.containers'); */
   const containers = await listDockerContainer();
+
   return (
     <Box className={classes.box}>
       <ContainerTable

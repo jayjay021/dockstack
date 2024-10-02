@@ -1,8 +1,9 @@
 'use client';
+export const revalidate = 0;
 
 import { ContainerSummary } from '@/services/docker-api';
 import { ActionIcon, Badge, Box, Button, Title } from '@mantine/core';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 
 import {
   MantineReactTable,
@@ -25,6 +26,7 @@ import { useTranslations } from 'next-intl';
 
 import classes from './ContainerTable.module.css';
 import Searchbar from '@/components/Searchbar';
+import LogDialog from '@/app/(app)/containers/LogDialog';
 
 interface ContainerTableProps {
   data: ContainerSummary[];
@@ -32,6 +34,8 @@ interface ContainerTableProps {
 
 const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
   const t = useTranslations('pages.containers');
+  const [logDialogId, setLogDialogId] = useState<string | null>(null);
+
   const columns = useMemo<MRT_ColumnDef<ContainerSummary>[]>(
     () => [
       {
@@ -101,13 +105,18 @@ const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
     columns,
     enableRowActions: true,
     positionActionsColumn: 'last',
-    renderRowActions: () => {
+    renderRowActions: ({ row }) => {
+      const containerData = data[row.index];
       return (
         <Box style={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
           <ActionIcon color="blue" size="sm">
             <IconTerminal2 stroke={ICON_STROKE} size={18} />
           </ActionIcon>
-          <ActionIcon color="blue" size="sm">
+          <ActionIcon
+            color="blue"
+            size="sm"
+            onClick={() => setLogDialogId(containerData.Id ?? null)}
+          >
             <IconListSearch stroke={ICON_STROKE} size={18} />
           </ActionIcon>
         </Box>
@@ -221,7 +230,16 @@ const ContainerTable: FC<ContainerTableProps> = ({ data }) => {
     data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
   });
 
-  return <MantineReactTable table={table} />;
+  return (
+    <>
+      <LogDialog
+        id={logDialogId}
+        opened={!!logDialogId}
+        setOpen={() => setLogDialogId(null)}
+      />
+      <MantineReactTable table={table} />
+    </>
+  );
 };
 
 export default ContainerTable;

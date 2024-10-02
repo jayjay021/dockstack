@@ -77,6 +77,11 @@
           "id": "Id",
           "actions": "Aktionen"
         }
+      },
+      "dialogs": {
+        "log": {
+          "title": "Logs"
+        }
       }
     }
   },
